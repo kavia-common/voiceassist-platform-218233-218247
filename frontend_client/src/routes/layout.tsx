@@ -12,9 +12,14 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 // PUBLIC_INTERFACE
 export default component$(() => {
   useStyles$(styles);
+
   return (
-    <main>
-      <Slot />
-    </main>
+    <>
+      <div class="crt-overlay" aria-hidden="true" />
+      <div class="scanlines" aria-hidden="true" />
+      <main class="app">
+        <Slot />
+      </main>
+    </>
   );
 });

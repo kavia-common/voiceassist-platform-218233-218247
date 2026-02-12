@@ -1,21 +1,32 @@
 /**
  * WHAT IS THIS FILE?
  *
- * Globally applied styles for the ultralight Qwik template.
- * Uses a minimalistic light theme with specified color scheme.
+ * Global styles + retro theme for the Voice Assistant UI.
+ * The design aims for a neon/CRT retro look while staying accessible.
  */
 
 :root {
-  --primary-color: #000000;
-  --secondary-color: #333333;
-  --accent-color: #0078d4;
-  --background-color: #ffffff;
-}
+  /* Core palette (retro) */
+  --bg: #070816;
+  --surface: #0e1030;
+  --surface-2: #12164a;
+  --text: #e9e7ff;
+  --muted: rgba(233, 231, 255, 0.72);
 
-html {
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-  font-family:
+  --neon-pink: #ff4fd8;
+  --neon-cyan: #36f3ff;
+  --neon-lime: #b6ff4d;
+  --warning: #ffca3a;
+  --danger: #ff3b5c;
+
+  --border: rgba(54, 243, 255, 0.35);
+  --shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+
+  --font-ui:
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -26,16 +37,111 @@ html {
     Arial,
     "Noto Sans",
     sans-serif;
+
+  --font-mono:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  font-family: var(--font-ui);
+  background: radial-gradient(1200px 600px at 30% 10%, rgba(255, 79, 216, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 70% 0%, rgba(54, 243, 255, 0.12), transparent 55%),
+    radial-gradient(1000px 700px at 60% 90%, rgba(182, 255, 77, 0.08), transparent 60%),
+    linear-gradient(180deg, var(--bg), #050513 70%);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
-  color: var(--primary-color);
-  line-height: inherit;
+  color: var(--text);
+  background: transparent;
+  min-height: 100vh;
 }
 
 * {
   box-sizing: border-box;
+}
+
+a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+::selection {
+  background: rgba(255, 79, 216, 0.3);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border: 1px solid rgba(54, 243, 255, 0.3);
+  border-bottom-color: rgba(54, 243, 255, 0.18);
+  background: rgba(14, 16, 48, 0.8);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.0) 10%,
+      rgba(0, 0, 0, 0.02) 50%,
+      rgba(0, 0, 0, 0.0) 90%,
+      rgba(255, 255, 255, 0.02)
+    );
+  mix-blend-mode: overlay;
+  opacity: 0.65;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 21;
+  opacity: 0.18;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.55) 1px,
+    rgba(0, 0, 0, 0.0) 3px,
+    rgba(0, 0, 0, 0.0) 5px
+  );
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(54, 243, 255, 0.9);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(54, 243, 255, 0.18);
 }
